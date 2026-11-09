@@ -1,0 +1,25 @@
+# Project-specific Python environment
+.venv/
+venv/
+
+# Python caches and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# Environment variables, credentials, and private settings
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Local databases (future milestones)
+*.db
+*.sqlite
+*.sqlite3
+
+# System / editor metadata
+.DS_Store
+Thumbs.db
+.vscode/
