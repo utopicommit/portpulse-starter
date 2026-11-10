@@ -8,6 +8,7 @@ import requests
 import streamlit as st
 
 from vessel_data import REGIONS, fetch_snapshot, normalize_vessels
+from history_tab import show_history_tab
 
 st.set_page_config(page_title="PortPulse | Maritime Traffic", page_icon="🚢", layout="wide")
 st.title("🚢 PortPulse")
@@ -20,7 +21,7 @@ st.sidebar.markdown("🟢 Moving (≥ 1 knot)  \n🟠 Nearly stationary (< 1 kno
 st.sidebar.info("AIS snapshots are not official counts of port arrivals, berth delays, or congestion.")
 
 region = REGIONS[region_name]
-st.subheader(f"Vessel activity · {region_name}")
+#st.subheader(f"Vessel activity · {region_name}")
 
 
 @st.cache_data(ttl=45, show_spinner=False)
@@ -120,4 +121,15 @@ def live_dashboard() -> None:
             st.write("No additional attribution object was returned in this response.")
 
 
-live_dashboard()
+#live_dashboard()
+live_tab, history_tab = st.tabs([
+    "🚢 Live vessel map",
+    "📈 Historical port analytics",
+])
+
+with live_tab:
+    st.subheader(f"Vessel activity · {region_name}")
+    live_dashboard()
+
+with history_tab:
+    show_history_tab()
